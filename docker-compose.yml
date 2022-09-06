@@ -1,0 +1,25 @@
+version: '2'
+
+networks:
+  wanadev-tuto:
+    driver: bridge
+
+services:
+  wanadev-php:
+    image: 'bitnami/php-fpm:latest'
+    networks:
+      - wanadev-tuto
+    volumes:
+      - ./app:/app
+
+  wanadev-nginx:
+    image: 'bitnami/nginx:latest'
+    depends_on:
+      - wanadev-php
+    networks:
+      - wanadev-tuto
+    ports:
+      - '8080:80'
+      - '4443:443'
+    volumes:
+      - ./docker-config/nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/wanadev-tuto.conf:ro

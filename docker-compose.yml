@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 networks:
   wanadev-tuto:
@@ -12,7 +12,7 @@ services:
     networks:
       - wanadev-tuto
     volumes:
-      - ./app:/app
+      - ./wanadev_app/:/app
 
   wanadev-nginx:
     image: 'bitnami/nginx:latest'

@@ -6,7 +6,10 @@ networks:
 
 services:
   wanadev-php:
-    image: 'bitnami/php-fpm:latest'
+    build:
+      context: ./docker-config/php
+      dockerfile: Dockerfile
+    container_name: wanadev-php
     depends_on:
       - wanadev-postgre
     networks:
@@ -15,9 +18,7 @@ services:
       - ./wanadev_app/:/app
 
   wanadev-nginx:
-    build:
-      context: ./docker-config/php
-      dockerfile: Dockerfile
+    image: 'bitnami/nginx:latest'
     depends_on:
       - wanadev-php
     networks:

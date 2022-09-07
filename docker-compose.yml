@@ -15,7 +15,9 @@ services:
       - ./wanadev_app/:/app
 
   wanadev-nginx:
-    image: 'bitnami/nginx:latest'
+    build:
+      context: ./docker-config/php
+      dockerfile: Dockerfile
     depends_on:
       - wanadev-php
     networks:

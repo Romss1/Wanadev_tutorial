@@ -1,4 +1,4 @@
-.PHONY: start stop stan test before-push
+.PHONY: start stop stan cs-fix test before-push
 
 install:
 	docker-compose -f ../docker-compose.yml build
@@ -15,6 +15,9 @@ stan:
 
 cs:
 	./vendor/bin/php-cs-fixer fix --diff --dry-run
+
+cs-fix:
+	./vendor/bin/php-cs-fixer fix
 
 test:
 	./bin/phpunit

@@ -1,6 +1,7 @@
 .PHONY: start stop stan test before-push
 
 install:
+	docker-compose -f ../docker-compose.yml build
 	composer install
 
 start:

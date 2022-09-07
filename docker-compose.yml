@@ -1,0 +1,43 @@
+version: '3'
+
+networks:
+  wanadev-tuto:
+    driver: bridge
+
+services:
+  wanadev-php:
+    image: 'bitnami/php-fpm:latest'
+    depends_on:
+      - wanadev-postgre
+    networks:
+      - wanadev-tuto
+    volumes:
+      - ./wanadev_app/:/app
+
+  wanadev-nginx:
+    image: 'bitnami/nginx:latest'
+    depends_on:
+      - wanadev-php
+    networks:
+      - wanadev-tuto
+    ports:
+      - '8080:80'
+      - '4443:443'
+    volumes:
+      - ./docker-config/nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/wanadev-tuto.conf:ro
+
+  wanadev-postgre:
+    image: 'bitnami/postgresql:latest'
+    networks:
+      - wanadev-tuto
+    ports:
+      - "6543:5432"
+    volumes:
+        - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=romain
+      - POSTGRES_USER=romain
+      - POSTGRESQL_DATABASE=wanadev_tuto
+
+volumes:
+  db_data: ~

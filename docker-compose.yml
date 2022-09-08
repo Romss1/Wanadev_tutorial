@@ -7,6 +7,7 @@ networks:
 services:
   wanadev-php:
     image: 'bitnami/php-fpm:latest'
+    container_name: wanadev-php
     depends_on:
       - wanadev-postgre
     networks:
@@ -16,6 +17,9 @@ services:
 
   wanadev-nginx:
     image: 'bitnami/nginx:latest'
+    container_name: wanadev-nginx
+    env_file:
+      - ./wanadev_app/.env
     depends_on:
       - wanadev-php
     networks:
@@ -28,16 +32,15 @@ services:
 
   wanadev-postgre:
     image: 'bitnami/postgresql:latest'
+    container_name: wanadev-postgre
+    env_file:
+      - ./wanadev_app/.env
     networks:
       - wanadev-tuto
     ports:
       - "6543:5432"
     volumes:
         - db_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=romain
-      - POSTGRES_USER=romain
-      - POSTGRESQL_DATABASE=wanadev_tuto
 
 volumes:
   db_data: ~

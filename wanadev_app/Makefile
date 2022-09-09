@@ -20,6 +20,7 @@ cs-fix:
 	./vendor/bin/php-cs-fixer fix
 
 test:
+	./bin/console doctrine:fixtures:load -n --env=test
 	./bin/phpunit
 
 before-push: cs stan test

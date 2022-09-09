@@ -1,3 +1,7 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+post-video-game:
+    path: /video-game
+    controller: App\Controller\PostVideoGameController

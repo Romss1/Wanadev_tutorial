@@ -16,6 +16,7 @@ services:
       - wanadev-tuto
     volumes:
       - ./wanadev_app/:/app
+      - ./docker-config/php/php.ini:/opt/bitnami/php/etc/conf.d/php.ini
 
   wanadev-nginx:
     image: 'bitnami/nginx:latest'
@@ -31,6 +32,7 @@ services:
 
   wanadev-postgre:
     image: 'bitnami/postgresql:latest'
+    container_name: wanadev-postgre
     networks:
       - wanadev-tuto
     ports:

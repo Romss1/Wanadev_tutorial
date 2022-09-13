@@ -20,6 +20,9 @@ cs-fix:
 	./vendor/bin/php-cs-fixer fix
 
 test:
+	./bin/console doctrine:database:drop --force -n --if-exists --env=test
+	./bin/console doctrine:database:create -n --env=test
+	./bin/console doctrine:migrations:migrate -n --env=test
 	./bin/console doctrine:fixtures:load -n --env=test
 	./bin/phpunit
 

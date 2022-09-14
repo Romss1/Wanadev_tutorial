@@ -15,8 +15,9 @@ services:
     networks:
       - wanadev-tuto
     volumes:
-      - ./wanadev_app/:/app
+      - ./wanadev_app/:/var/www/html/app
       - ./docker-config/php/php.ini:/opt/bitnami/php/etc/conf.d/php.ini
+    working_dir: /var/www/html/app
 
   wanadev-nginx:
     image: 'bitnami/nginx:latest'
